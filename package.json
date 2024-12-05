@@ -1,0 +1,24 @@
+{
+  "name": "chrome-extension-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node esbuild.js",
+    "chrome": "web-ext run -s dist -t chromium --start-url https://example.com/",
+    "lint": "biome check --write src",
+    "build": "NODE_ENV=production node esbuild.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.24.0",
+    "rebrowser-playwright": "^1.48.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
