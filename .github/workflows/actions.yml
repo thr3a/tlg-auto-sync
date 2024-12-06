@@ -5,7 +5,7 @@ on:
   # デバッグ用に手動実行を許可
   workflow_dispatch:
   schedule:
-    - cron: "0 15 * * *"
+    - cron: "45 8 * * *"
 
 env:
   TZ: Asia/Tokyo
