@@ -40,10 +40,10 @@ jobs:
         run: npm ci
 
       - name: run
-        run: npm run browser-check
+        run: npm run sync
 
-      - name: スクリーンショットをアップロード
-        uses: actions/upload-artifact@v3
-        with:
-          name: browser-check-screenshot
-          path: screenshot.png
+      # - name: スクリーンショットをアップロード
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: browser-check-screenshot
+      #     path: screenshot.png

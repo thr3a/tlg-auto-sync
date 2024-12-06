@@ -6,7 +6,7 @@ async function scrapeTwilog(username: string): Promise<void> {
 
   try {
     browser = await chromium.launch({
-      headless: false,
+      headless: true,
       executablePath: chromePath()
     });
 
