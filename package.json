@@ -5,10 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node esbuild.js",
-    "chrome": "web-ext run -s dist -t chromium --start-url https://example.com/",
-    "lint": "biome check --write src",
-    "build": "NODE_ENV=production node esbuild.js"
+    "sync": "node --import tsx src/click.ts",
+    "browser-check": "node --import tsx src/checkbot.ts"
   },
   "keywords": [],
   "author": "",

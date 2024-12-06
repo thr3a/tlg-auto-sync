@@ -1,4 +1,4 @@
-name: Chrome Setup and Test
+name: Twilog Updater
 
 on:
   push:
@@ -20,9 +20,30 @@ jobs:
         uses: browser-actions/setup-chrome@v1
         id: setup-chrome
         with:
-          chrome-version: "131"
+          chrome-version: 131
+          install-dependencies: true
 
       - name: Chrome のバージョンとパスを確認
         run: |
           echo "インストールされたChromeのパス: ${{ steps.setup-chrome.outputs.chrome-path }}"
-          ${{ steps.setup-chrome.outputs.chrome-path }} --version
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install NPM packages
+        run: npm ci
+
+      - name: run
+        run: npm run browser-check
+
+      - name: スクリーンショットをアップロード
+        uses: actions/upload-artifact@v3
+        with:
+          name: browser-check-screenshot
+          path: screenshot.png

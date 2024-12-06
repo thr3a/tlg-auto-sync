@@ -1,16 +1,19 @@
-import { chromium, type Browser } from 'rebrowser-playwright';
+import { type Browser, chromium } from 'rebrowser-playwright';
+import { chromePath } from './util';
 
 async function scrapeTwilog(username: string): Promise<void> {
   let browser: Browser | null = null;
 
   try {
     browser = await chromium.launch({
-      headless: true
+      headless: false,
+      executablePath: chromePath()
     });
 
     const context = await browser.newContext({
       viewport: { width: 1366, height: 768 },
-      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.2903.86',
+      userAgent:
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.2903.86',
       locale: 'ja-JP'
     });
 
@@ -18,12 +21,9 @@ async function scrapeTwilog(username: string): Promise<void> {
 
     await page.goto(`https://twilog.togetter.com/${username}`);
 
-    // await page.click('*[@id="side-update"]/div/div/form/input');
     await page.waitForSelector('#side-update');
 
-    const updateButton = await page.waitForSelector(
-      '#side-update form input[type="submit"][value="最新の情報に更新する"]'
-    );
+    const updateButton = await page.waitForSelector('#side-update form input[type="submit"]');
     await updateButton.click();
 
     await page.waitForTimeout(3000);
@@ -37,7 +37,7 @@ async function scrapeTwilog(username: string): Promise<void> {
 }
 
 async function main() {
-  const username = 'iwatelife';
+  const username = 'amanekey';
   await scrapeTwilog(username);
 }
 
